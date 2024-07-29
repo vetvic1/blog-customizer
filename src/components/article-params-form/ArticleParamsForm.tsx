@@ -29,8 +29,8 @@ interface ArticleParamsFormProps {
 export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 	const { articleState, handleArticleState } = props;
 	const [formState, setFormState] = useState<ArticleStateType>(articleState);
-	const [isFormOpen, setIsFormOpen] = useState(false);
-	const containerRef = useRef(null);
+	const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
+	const containerRef = useRef<HTMLDivElement>(null);
 	const containerClassName = clsx(styles.container, {
 		[styles.container_open]: isFormOpen,
 	});
@@ -38,6 +38,7 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 	useOutsideClickClose({
 		isOpen: isFormOpen,
 		rootRef: containerRef,
+		onClose: () => setIsFormOpen(false),
 		onChange: setIsFormOpen,
 	});
 
